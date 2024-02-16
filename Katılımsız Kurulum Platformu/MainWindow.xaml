@@ -18,11 +18,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <hc:Window.NonClientAreaContent>
-        <Grid  Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Grid>
             <StackPanel Height="29" >
                 <Menu HorizontalAlignment="Left" Margin="12,0,0,0">
                     <MenuItem Header="Uygulama">
@@ -110,8 +106,13 @@
             </Popup>
         </Grid>
     </hc:Window.NonClientAreaContent>
-    <Grid Grid.Row="1" VerticalAlignment="Top" Margin="0,12,0,0" HorizontalAlignment="Stretch">
-        <hc:Card hc:BorderElement.CornerRadius="8" Width="Auto" Height="60" Margin="16,0,16,0" BorderThickness="0" VerticalAlignment="Top">
+    <Grid Grid.Column="0" VerticalAlignment="Top" Margin="0,12,0,0" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <hc:Card Grid.Row="0" hc:BorderElement.CornerRadius="8" Width="Auto" Height="60" Margin="16,0,16,0" BorderThickness="0" VerticalAlignment="Top">
             <Grid>
                 <WrapPanel VerticalAlignment="Center" Margin="12,0,0,0">
                     <Button hc:BorderElement.CornerRadius="8" Width="44" Height="40" ToolTip="Ekle" Click="Add_Click">
@@ -140,7 +141,28 @@
             </Grid>
             
         </hc:Card>
-        <hc:Card Margin="16,70,16,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" hc:BorderElement.CornerRadius="8">
+        <hc:Card Grid.Row="1" Margin="16,0,16,16" VerticalAlignment="Center" HorizontalAlignment="Stretch" hc:BorderElement.CornerRadius="8">
+            <Grid Height="40" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <WrapPanel VerticalAlignment="Center" Margin="12,0,0,0">
+                    <TextBlock Text="Kategori : " VerticalAlignment="Center"/>
+                    <hc:ComboBox x:Name="ComboBox" VerticalAlignment="Stretch" HorizontalAlignment="Center" MinWidth="140">
+                        <ComboBoxItem IsSelected="True" Content="Tümü"/>
+                        <ComboBoxItem Content="Web Tarayıcıları"/>
+                        <ComboBoxItem Content="Belgeler"/>
+                        <ComboBoxItem Content="Çevrimiçi Depolama"/>
+                        <ComboBoxItem Content="Mesajlaşma"/>
+                        <ComboBoxItem Content="Güvenlik"/>
+                        <ComboBoxItem Content="Geliştirici Araçları"/>
+                        <ComboBoxItem Content="Medya"/>
+                        <ComboBoxItem Content="Çalışma Zamanları"/>
+                        <ComboBoxItem Content="Sıkıştırma"/>
+                        <ComboBoxItem Content="Resim - Görüntü"/>
+                        <ComboBoxItem Content="Yardımcı Programlar"/>
+                    </hc:ComboBox>
+                </WrapPanel>
+            </Grid>
+        </hc:Card>
+        <hc:Card VerticalAlignment="Top" Grid.Row="2" Margin="16,0,16,0"  HorizontalAlignment="Stretch" hc:BorderElement.CornerRadius="8">
             <Grid>
                 <ListView BorderThickness="0" x:Name="MyListView" AllowDrop="True" ItemsSource="{Binding DataList}" Margin="20">
                     <ListView.View>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shades\\Desktop\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj": {}
+    "C:\\Users\\shades\\Desktop\\Katilimsiz_Kurulum_Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shades\\Desktop\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj": {
+    "C:\\Users\\shades\\Desktop\\Katilimsiz_Kurulum_Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shades\\Desktop\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj",
+        "projectUniqueName": "C:\\Users\\shades\\Desktop\\Katilimsiz_Kurulum_Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj",
         "projectName": "Katılımsız Kurulum Platformu",
-        "projectPath": "C:\\Users\\shades\\Desktop\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj",
+        "projectPath": "C:\\Users\\shades\\Desktop\\Katilimsiz_Kurulum_Platformu\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu.csproj",
         "packagesPath": "C:\\Users\\shades\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shades\\Desktop\\Katılımsız Kurulum Platformu\\Katılımsız Kurulum Platformu\\obj\\",
+        "outputPath": "C:\\Users\\shades\\Desktop\\Katilimsiz_Kurulum_Platformu\\Katılımsız Kurulum Platformu\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

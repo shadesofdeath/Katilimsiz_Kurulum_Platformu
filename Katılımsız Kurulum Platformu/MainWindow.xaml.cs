@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Win32;
 using Material.Icons.WPF;
 using Material.Icons;
+using System.Collections.Generic;
 namespace Katılımsız_Kurulum_Platformu
 {
     public partial class MainWindow
@@ -73,7 +74,7 @@ namespace Katılımsız_Kurulum_Platformu
         public MainWindow()
         {
             InitializeComponent();
-
+            this.ComboBox.SelectionChanged += ComboBox_SelectionChanged;
             string ProgramPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar");
             if (!Directory.Exists(ProgramPath))
             {
@@ -131,7 +132,53 @@ namespace Katılımsız_Kurulum_Platformu
                     Boyut = fileSize
                 });
             }
+            if (ComboBox != null && ComboBox.SelectedItem != null)
+            {
+                ComboBox_SelectionChanged(ComboBox, null);
+            }
         }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedCategory = (ComboBox.SelectedItem as ComboBoxItem).Content.ToString();
+
+            ListProgramsByCategory(selectedCategory);
+        }
+        private void ListProgramsByCategory(string category)
+        {
+            if (category == "Tümü")
+            {
+                LoadAllPrograms();
+                return;
+            }
+
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", category);
+            if (Directory.Exists(path))
+            {
+                DataList.Clear();
+                foreach (var file in Directory.GetFiles(path, "*.exe"))
+                {
+                    AddProgramToList(file);
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        private void LoadAllPrograms()
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar");
+            DataList.Clear(); 
+            foreach (var directory in Directory.GetDirectories(path))
+            {
+                foreach (var file in Directory.GetFiles(directory, "*.exe"))
+                {
+                    AddProgramToList(file);
+                }
+            }
+        }
+
         private void OpenFolder_Click(object sender, RoutedEventArgs e)
         {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar");
@@ -142,12 +189,29 @@ namespace Katılımsız_Kurulum_Platformu
             if (MyListView.SelectedItem is ProgramInfo selectedProgram)
             {
                 string oldName = selectedProgram.Name;
-                string oldPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", oldName + ".exe");
+                string oldPath = null;
+
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar");
+                foreach (var directory in Directory.GetDirectories(path))
+                {
+                    string tempPath = Path.Combine(directory, oldName + ".exe");
+                    if (File.Exists(tempPath))
+                    {
+                        oldPath = tempPath;
+                        break; 
+                    }
+                }
+
+                if (oldPath == null)
+                {
+                    MessageBox.Show("Dosya bulunamadı: " + oldName, "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 string newName = Microsoft.VisualBasic.Interaction.InputBox("Yeni ismi girin", "Yeniden Adlandır", oldName);
                 if (!string.IsNullOrEmpty(newName) && newName != oldName)
                 {
-                    string newPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", newName + ".exe");
+                    string newPath = Path.Combine(Path.GetDirectoryName(oldPath), newName + ".exe");
 
                     File.Move(oldPath, newPath);
 
@@ -158,31 +222,8 @@ namespace Katılımsız_Kurulum_Platformu
                 }
             }
         }
-        private void ListView_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                foreach (string file in files)
-                {
-                    if (System.IO.Path.GetExtension(file).Equals(".exe", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", Path.GetFileName(file));
 
-                        if (File.Exists(destinationPath))
-                        {
-                            MessageBox.Show("Aynı isimde bir dosya zaten var: " + Path.GetFileName(file), "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            File.Copy(file, destinationPath, true);
-
-                            AddProgramToList(destinationPath);
-                        }
-                    }
-                }
-            }
-        }
+        
 
         #region Change Theme
         private void ButtonConfig_OnClick(object sender, RoutedEventArgs e) => PopupConfig.IsOpen = true;
@@ -205,10 +246,10 @@ namespace Katılımsız_Kurulum_Platformu
         #endregion
         private void KahveIsmarla_Click(object sender, EventArgs e) => Process.Start("https://www.buymeacoffee.com/berkayay");
         private void GithubAdresim_OnClick(object sender, EventArgs e) => Process.Start("https://github.com/shadesofdeath");
-        private void ProjeKaynak_OnClick(object sender, EventArgs e) => Process.Start("https://github.com/shadesofdeath");
+        private void ProjeKaynak_OnClick(object sender, EventArgs e) => Process.Start("https://github.com/shadesofdeath/Katilimsiz_Kurulum_Platformu");
         private void Hakkinda_OnClick(object sender, EventArgs e)
         {
-            string message = "Program Adı: Katılımsız Kurulum Platformu\n\nSürüm: v1.0\n\nGeliştirici: Berkay AY\n\nAçıklama: Bu program, katılımsız programları tek tıkla kurmanızı sağlar. Kullanıcı dostu arayüzü ve hızlı işlem süresi ile zamandan tasarruf etmenize yardımcı olur. Programın amacı, kullanıcıların zamandan tasarruf etmesini sağlamaktır. ";
+            string message = "Program Adı: Katılımsız Kurulum Platformu\n\nSürüm: v1.1\n\nGeliştirici: Berkay AY\n\nAçıklama: Bu program, katılımsız programları tek tıkla kurmanızı sağlar. Kullanıcı dostu arayüzü ve hızlı işlem süresi ile zamandan tasarruf etmenize yardımcı olur. Programın amacı, kullanıcıların zamandan tasarruf etmesini sağlamaktır. ";
             string title = "Hakkında";
             MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -220,7 +261,6 @@ namespace Katılımsız_Kurulum_Platformu
         }
         private async void Kur_Click(object sender, RoutedEventArgs e)
         {
-            
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar");
             if (DataList.Count == 0)
             {
@@ -242,40 +282,47 @@ namespace Katılımsız_Kurulum_Platformu
                 AppProgress.Visibility = Visibility.Visible;
                 int currentProgramIndex = 0;
                 int failedCount = 0;
-                foreach (var program in DataList)
+
+                var dataListCopy = new List<ProgramInfo>(DataList);
+
+                foreach (var program in dataListCopy)
                 {
                     if (program.Secim)
                     {
-                        string filePath = Path.Combine(path, program.Name + ".exe"); 
-                        if (File.Exists(filePath))
+                        foreach (var directory in Directory.GetDirectories(path))
                         {
-                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            string filePath = Path.Combine(directory, program.Name + ".exe");
+                            if (File.Exists(filePath))
                             {
-                                FileName = filePath,
-                                UseShellExecute = true,
-                                Verb = "runas"
-                            };
-                            Process process = new Process { StartInfo = startInfo };
-                            try
-                            {
-                                process.Start();
+                                ProcessStartInfo startInfo = new ProcessStartInfo
+                                {
+                                    FileName = filePath,
+                                    UseShellExecute = true,
+                                    Verb = "runas"
+                                };
+                                Process process = new Process { StartInfo = startInfo };
+                                try
+                                {
+                                    process.Start();
+                                    this.Dispatcher.Invoke(() =>
+                                    {
+                                        AppName.Text = $"{program.Name} kuruluyor..";
+                                    });
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                    failedCount++;
+                                }
+
+                                await Task.Run(() => process.WaitForExit());
                                 this.Dispatcher.Invoke(() =>
                                 {
-                                    AppName.Text = $"{program.Name} kuruluyor..";
+                                    double progressPercentage = ((double)++currentProgramIndex / selectedProgramCount) * 100;
+                                    AppProgress.Value = progressPercentage;
                                 });
+                                break; 
                             }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message);
-                                failedCount++;
-                            }
-
-                            await Task.Run(() => process.WaitForExit());
-                            this.Dispatcher.Invoke(() =>
-                            {
-                                double progressPercentage = ((double)++currentProgramIndex / selectedProgramCount) * 100;
-                                AppProgress.Value = progressPercentage;
-                            });
                         }
                     }
                 }
@@ -298,6 +345,8 @@ namespace Katılımsız_Kurulum_Platformu
                 AppProgress.Visibility = Visibility.Hidden;
             }
         }
+
+
         private bool _selectAll = false;
 
         private void SelectAll_Click(object sender, RoutedEventArgs e)
@@ -344,8 +393,53 @@ namespace Katılımsız_Kurulum_Platformu
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             DataList.Clear();
-            LoadData();
+
+            string category = ComboBox.Text;
+
+            if (category == "Tümü")
+            {
+                LoadAllPrograms();
+            }
+            else
+            {
+                ListProgramsByCategory(category);
+            }
         }
+
+        private void ListView_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string file in files)
+                {
+                    if (System.IO.Path.GetExtension(file).Equals(".exe", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string category = ComboBox.Text;
+
+                        if (category == "Tümü")
+                        {
+                            MessageBox.Show("'Tümü' kategorisine dosya eklenemez. Lütfen başka bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                        }
+
+                        string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", category, Path.GetFileName(file));
+
+                        if (File.Exists(destinationPath))
+                        {
+                            MessageBox.Show("Aynı isimde bir dosya zaten var: " + Path.GetFileName(file), "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            File.Copy(file, destinationPath, true);
+
+                            AddProgramToList(destinationPath);
+                        }
+                    }
+                }
+            }
+        }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -355,12 +449,22 @@ namespace Katılımsız_Kurulum_Platformu
             {
                 foreach (string fileName in openFileDialog.FileNames)
                 {
-                    string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", Path.GetFileName(fileName));
+                    string category = ComboBox.Text;
+
+                    if (category == "Tümü")
+                    {
+                        MessageBox.Show("'Tümü' kategorisine dosya eklenemez. Lütfen başka bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    }
+
+                    string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", category, Path.GetFileName(fileName));
+
                     File.Copy(fileName, destinationPath, true);
                     AddProgramToList(destinationPath);
                 }
             }
         }
+
 
         private void Trash_Click(object sender, RoutedEventArgs e)
         {
@@ -372,13 +476,20 @@ namespace Katılımsız_Kurulum_Platformu
                 return;
             }
 
+            if (ComboBox.Text == "Tümü")
+            {
+                MessageBox.Show("'Tümü' kategorisinden dosya silinemez. Lütfen başka bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (MessageBox.Show("Seçili programları silmek istediğinize emin misiniz?", "Onay", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 for (int i = DataList.Count - 1; i >= 0; i--)
                 {
                     if (DataList[i].Secim)
                     {
-                        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", DataList[i].Name + ".exe");
+                        string category = ComboBox.Text;
+                        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Programlar", category, DataList[i].Name + ".exe");
                         if (File.Exists(filePath))
                         {
                             File.Delete(filePath);
@@ -388,6 +499,7 @@ namespace Katılımsız_Kurulum_Platformu
                 }
             }
         }
+
 
         private void AddProgramToList(string filePath)
         {

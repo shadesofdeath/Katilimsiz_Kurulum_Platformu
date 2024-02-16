@@ -1,0 +1,16 @@
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\bin\Release\Katılımsız Kurulum Platformu.exe.config
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\bin\Release\Katılımsız Kurulum Platformu.exe
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\bin\Release\Katılımsız Kurulum Platformu.pdb
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.csproj.AssemblyReference.cache
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\MainWindow.baml
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Properties\DesignTimeResources.baml
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\App.baml
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\MainWindow.g.cs
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\App.g.cs
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu_Content.g.cs
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu_MarkupCompile.cache
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.g.resources
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.csproj.CoreCompileInputs.cache
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.csproj.Fody.CopyLocal.cache
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.exe
+C:\Users\shades\Desktop\Katılımsız Kurulum Platformu\Katılımsız Kurulum Platformu\obj\Release\Katılımsız Kurulum Platformu.pdb

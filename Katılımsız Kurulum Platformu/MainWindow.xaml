@@ -1,0 +1,171 @@
+<hc:Window
+    x:Class="Katılımsız_Kurulum_Platformu.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Katılımsız Kurulum Platformu"
+    ShowIcon="True"
+    FontFamily="Cascadia Code"
+    Icon="pack://application:,,,/assets/icon.png"
+    Width="900"
+    MinWidth="900"
+    MinHeight="520"
+    Height="520"
+    ShowTitle="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <hc:Window.NonClientAreaContent>
+        <Grid  Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Height="29" >
+                <Menu HorizontalAlignment="Left" Margin="12,0,0,0">
+                    <MenuItem Header="Uygulama">
+                        <MenuItem Header="Github Adresim" Click="GithubAdresim_OnClick">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="Github"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Kaynak Kodu" Click="ProjeKaynak_OnClick">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="FileCodeOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Hakkında" Click="Hakkinda_OnClick">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="InfoOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Destek">
+                        <MenuItem Header="Kahve Ismarla" Click="KahveIsmarla_Click">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="CoffeeOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="IBAN" Click="Iban_OnClick">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="CreditCardOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+            <Button
+                Name="ButtonConfig"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                Click="ButtonConfig_OnClick"
+                Foreground="{DynamicResource PrimaryTextBrush}"
+                Style="{StaticResource ButtonIcon}"/>
+            <Popup
+                Name="PopupConfig"
+                Grid.Column="1"
+                AllowsTransparency="True"
+                HorizontalOffset="-35"
+                PlacementTarget="{Binding ElementName=ButtonConfig}"
+                StaysOpen="False"
+                VerticalOffset="6">
+                <Border
+                    Margin="16"
+                    Background="{DynamicResource SecondaryRegionBrush}"
+                    CornerRadius="4"
+                    Effect="{StaticResource EffectShadow2}">
+                    <StackPanel Button.Click="ButtonSkins_OnClick">
+                        <hc:Divider
+                            Width="200"
+                            Margin="0,10"
+                            Content="Tema"/>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,12">
+                            <Button Style="{StaticResource ButtonCustom}" Tag="{x:Static hc:ApplicationTheme.Light}">
+                                <Border
+                                    Width="32"
+                                    Height="21"
+                                    Background="White"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="0"
+                                    CornerRadius="6"/>
+                            </Button>
+                            <Button
+                                Margin="10,0,0,0"
+                                Style="{StaticResource ButtonCustom}"
+                                Tag="{x:Static hc:ApplicationTheme.Dark}">
+                                <Border
+                                    Width="32"
+                                    Height="21"
+                                    Background="Black"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="0"
+                                    CornerRadius="6"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
+    <Grid Grid.Row="1" VerticalAlignment="Top" Margin="0,12,0,0" HorizontalAlignment="Stretch">
+        <hc:Card hc:BorderElement.CornerRadius="8" Width="Auto" Height="60" Margin="16,0,16,0" BorderThickness="0" VerticalAlignment="Top">
+            <Grid>
+                <WrapPanel VerticalAlignment="Center" Margin="12,0,0,0">
+                    <Button hc:BorderElement.CornerRadius="8" Width="44" Height="40" ToolTip="Ekle" Click="Add_Click">
+                        <materialIcons:MaterialIcon Kind="AddBold" Foreground="#15F5BA"/>
+                    </Button>
+                    <Button hc:BorderElement.CornerRadius="8" Width="44" Height="40" Margin="12,0,0,0" ToolTip="Sil" Click="Trash_Click">
+                        <materialIcons:MaterialIcon Kind="TrashOutline" Foreground="#D04848"/>
+                    </Button>
+                    <Button hc:BorderElement.CornerRadius="8" Width="44" Height="40" Margin="12,0,0,0" ToolTip="Yenile" Click="Refresh_Click">
+                        <materialIcons:MaterialIcon Kind="Refresh" Foreground="#40A2D8"/>
+                    </Button>
+                    <Button hc:BorderElement.CornerRadius="8" Click="Kur_Click" x:Name="Kur" Width="44" Height="40" Margin="12,0,0,0" ToolTip="Kur">
+                        <materialIcons:MaterialIcon Kind="Play" Foreground="#864AF9"/>
+                    </Button>
+                    <Button hc:BorderElement.CornerRadius="8" Click="SelectAll_Click" x:Name="SelectAll" Width="44" Height="40" Margin="12,0,0,0" ToolTip="Tümünü seç">
+                        <materialIcons:MaterialIcon Kind="CheckBold" Foreground="#F6D776"/>
+                    </Button>
+                    <Button hc:BorderElement.CornerRadius="8"   x:Name="OpenFolder" Width="44" Height="40" Margin="12,0,0,0" ToolTip="Programları Aç">
+                        <materialIcons:MaterialIcon Kind="Folder" Foreground="#316B83"/>
+                    </Button>
+                </WrapPanel>
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,12,0">
+                    <TextBlock x:Name="AppName" Text="" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                    <hc:CircleProgressBar Visibility="Hidden" x:Name="AppProgress" Width="40" Height="40" Foreground="#7C73C0"/>
+                </WrapPanel>
+            </Grid>
+            
+        </hc:Card>
+        <hc:Card Margin="16,70,16,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" hc:BorderElement.CornerRadius="8">
+            <Grid>
+                <ListView BorderThickness="0" x:Name="MyListView" AllowDrop="True" ItemsSource="{Binding DataList}" Margin="20">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="Auto" Header="Seçim">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Secim}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="İkon" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Icon}" Height="28" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="400" Header="Program Adı" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Width="160" Header="Sürüm" DisplayMemberBinding="{Binding Sürüm}"/>
+                            <GridViewColumn Width="100" Header="Boyut" DisplayMemberBinding="{Binding Boyut}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </hc:Card >
+    </Grid>
+</hc:Window>

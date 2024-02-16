@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shades\\Desktop\\Kat-l-ms-z_Kurulum_Platformu\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{842B33A7-5E90-4243-ABC2-868652525B32}|Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\Kat\u0131l\u0131ms\u0131z Kurulum Platformu.csproj|c:\\users\\shades\\desktop\\kat-l-ms-z_kurulum_platformu\\kat\u0131l\u0131ms\u0131z kurulum platformu\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{842B33A7-5E90-4243-ABC2-868652525B32}|Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\Kat\u0131l\u0131ms\u0131z Kurulum Platformu.csproj|solutionrelative:kat\u0131l\u0131ms\u0131z kurulum platformu\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 329,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\shades\\Desktop\\Kat-l-ms-z_Kurulum_Platformu\\Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\shades\\Desktop\\Kat-l-ms-z_Kurulum_Platformu\\Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Kat\u0131l\u0131ms\u0131z Kurulum Platformu\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-15T22:53:55.373Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

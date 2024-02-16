@@ -1,0 +1,16 @@
+<Application x:Class="Katılımsız_Kurulum_Platformu.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <hc:ThemeResources UsingSystemTheme="true"/>
+                <hc:ThemeResources RequestedTheme="Dark"/>
+                <hc:Theme x:Name="HandyTheme"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
